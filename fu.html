@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.1.4.min.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#output').listview().enhanceWithin();
+        })
+        function getData() {
+            $.ajax('tony.js?id=' + Math.random(), //fake json which match your structure
+                {
+                    dataType: "json",
+                    jsonp: "jsoncallback",
+                    method: 'get',
+                    contentType: 'application/json',
+                    success: function (data, status) {
+                        var _ul = $('<ul />').attr('data-role', 'listview');
+                        $.each(data, function (i, item) {
+                            $('<li data-icon="false" />')
+                               .append($('<a href="" id="' + item.id + '" />')
+                                 .append('<img src="http://gestisciapp.it/gruppodipalo/images/' + item.img + '" />')
+                                 .append('<h2>' + item.marca + '</h2>')
+                                 .append('<p class="wrap">' + item.descrizione + '</p>')
+                                 .append('<span class="ui-li-count">' + item.prezzo + ' €</span>')
+                                )//$('<a />')
+                            .appendTo(_ul);
+                        });
+                        $('#output').empty().append(_ul).listview('refresh').enhanceWithin();//
+                    },
+                    error: function (xhr, d, s) {
+                        $('#output').empty().html(s);
+                    }
+                });
+        }
+    </script>
+</head>
+<body>
+    <button onclick="getData()">Get Data</button>
+    <div id="output">
+        <ul data-role="listview">
+            <li data-icon="false">
+                <a href="" id="35">
+                    <img src="http://gestisciapp.it/gruppodipalo/images/1image.jpg" />
+                    <h2>Prova6</h2>
+                    <p class="wrap">descrizione lunga per test andare a capo</p>
+                    <span class="ui-li-count">1.7 €</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

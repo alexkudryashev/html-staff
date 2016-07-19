@@ -1,0 +1,341 @@
+﻿<html>
+<!--All my images were taken from google images-->
+<!--4/29/2016-->
+
+<head>
+    <title>LMC GYM</title>
+    <!--</body>-->
+
+    <link rel=" stylesheet " type="text/css" href="Acss.css" />
+
+    <script>
+
+function validate_form ()
+{
+
+valid = true;
+
+var emailverify = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+var letter = /^[a-zA-Z]+$/;
+var zip = /(^\d{5}$)|(^\d{5}-\d{4}$)/;
+
+
+if (emailverify.test(document.contact_form.contact_email.value) == false)
+{
+alert ("Please put in a valid email provider.");
+valid = false;
+}
+
+
+if (document.contact_form.contact_email.value =="")
+{
+alert ("Please put in your email.");
+valid = false;
+}
+
+if (document.contact_form.contact_pass.value =="")
+{
+alert ("Please put in a password.");
+valid = false;
+}
+
+if (document.contact_form.contact_pass1.value !=       document.contact_form.contact_pass.value)
+{
+alert ("Please make sure passwords are the same.");
+valid = false;
+}
+
+
+if (document.contact_form.contact_first.value =="")
+{
+alert ("Please put in your first name.");
+valid = false;
+}
+
+if (letter.test(document.contact_form.contact_first.value) == false)
+{
+alert ("No numbers! Please enter a valid first name.");
+valid = false;
+}
+
+if (document.contact_form.contact_last.value =="")
+{
+alert ("Please put in your last name.");
+valid = false;
+}
+
+if (letter.test(document.contact_form.contact_last.value) == false)
+{
+alert ("No numbers! Please enter a valid last name.");
+valid = false;
+}
+
+
+if (document.contact_form.contact_state.value =="")
+{
+alert ("Please enter state abbrevation, example New York-NY.");
+valid = false;
+}
+
+if (letter.test(document.contact_form.contact_state.value) == false)
+{
+alert ("Reminder no numbers! Please put in state abbrevation.");
+valid = false;
+}
+
+if (document.contact_form.contact_city.value =="")
+{
+alert ("Please put in your current city.");
+valid = false;
+}
+
+if (letter.test(document.contact_form.contact_city.value) == false)
+{
+alert ("Reminder no numbers! Please put in your current city.");
+valid = false;
+}
+
+if (document.contact_form.contact_add.value =="")
+{
+alert ("Please put in your address.");
+valid = false;
+}
+
+if (document.contact_form.contact_zip.value =="")
+{
+alert ("Please put in your zip code.");
+valid = false;
+}
+
+if (zip.test(document.contact_form.contact_zip.value) == false)
+{
+alert ("No letters in zip code!!.");
+valid = false;
+}
+
+if (document.contact_form.contact_phone.value =="")
+{
+alert ("Please put in your phone number.");
+valid = false;
+}
+
+
+if (( document.contact_form.gen[0].checked == false) && (
+document.contact_form.gen[1].checked == false ))
+{
+alert ("Please choose your Gender: Male or Female");
+valid = false;
+}
+
+
+if (document.contact_form.Membership.selectedIndex == 0)
+{
+alert ("Please choose a membership.");
+valid = false;
+}
+
+if (( document.contact_form.card[0].checked == false) && (
+document.contact_form.card[1].checked == false ) && (
+document.contact_form.card[2].checked == false ) && (
+document.contact_form.card[3].checked == false ))
+{
+alert ("Please choose a card type");
+valid = false;
+}
+
+if (document.contact_form.contact_cn.value =="")
+{
+alert ("Please put in your card number.");
+valid = false;
+}
+
+
+if (document.contact_form.contact_cvv.value =="")
+{
+alert ("Please put in your 3 digit cvv.");
+valid = false;
+}
+
+
+if (document.contact_form.Expmonth.selectedIndex == 0)
+{
+alert ("Please choose a month on your credit card.");
+valid = false;
+}
+
+
+if (document.contact_form.Expyear.selectedIndex == 0)
+{
+alert ("Please choose a year on your credit card.");
+valid = false;
+}
+
+if (document.contact_form.contact_date.value =="")
+{
+alert ("Please fill in the 'Expiration Date' box in the month and year format MMYY.");
+valid = false;
+}
+
+if (document.contact_form.terms.checked == false)
+{
+alert ("Please check the Terms & Conditions box.");
+valid = false;
+}
+
+return false;
+
+}
+    </script>
+</head>
+
+<body>
+    <div class="contains">
+        <div class="head">
+            <h4> LMC GYM </h4>
+            <body background="https://wallpaperscraft.com/image/dumbbells_sports_gym_106546_3840x2 160.jpg">
+
+
+
+                </h4>
+        </div>
+        <div class="nav">
+            <h5>Navigate</h5>
+            <ul>
+                <li><a href="index.htm">Home</a></li>
+                </br>
+                <li><a href="Package.htm">Offers</a></li>
+                </br>
+                <li><a href="Form.htm">Gym Form</a></li>
+            </ul>
+
+
+
+
+        </div><!--nav><-->
+        <div class="chunk">
+
+
+
+
+            </script>
+            </head>
+
+
+
+            <form name="contact_form" method="get" onSubmit="return validate_form ( );">
+
+                <h1> Signup now to join the LMC GYM </h1>
+
+                <fieldset>
+                    <legend>Account Information:</legend>
+
+                    E-mail: <input type="email" name="contact_email"> </br></br>
+
+                    Password: <input type="password" name="contact_pass"></br></br>
+
+                    Verify Password: <input type="password" name="contact_pass1"></br></br>
+                </fieldset>
+
+                </br>
+
+                <fieldset>
+                    <legend>Contact Information:</legend>
+
+                    First Name: <input type="text" name="contact_first" maxlength="13"> </br></br>
+
+                    Last Name: <input type="text" name="contact_last" maxlength="13"> </br></br>
+
+                    State: <input type="text" name="contact_state" maxlength="2"> </br></br>
+
+                    City: <input type="text" name="contact_city" maxlength="13"> </br></br>
+
+                    Address: <input type="text" name="contact_add" maxlength="21"> </br></br>
+
+                    Zip Code: <input type="number" name="contact_zip" maxlength="5"> </br></br>
+
+                    Phone Number: <input type="number" name="contact_phone" maxlength="10"> </br>    </br>
+
+                    Your Gender: <input type="radio" name="gen" value="Male"> Male
+                    &nbsp; <input type="radio" name="gen" value="Female"> Female </br></br>
+                </fieldset> </br>
+
+
+                <fieldset>
+                    <legend>Payment Information:</legend>
+
+                    Membership:
+                    <select name="Membership">
+                        <option value="">Please choose an option:</option>
+                        <option value="Bronze "> Bronze </option>
+                        <option value="Silver"> Silver </option>
+                        <option value="Gold">Gold</option>
+                    </select> </br></br>
+
+                    Card Type: <input type="radio" name="card" value="Mastercard"> Mastercard &nbsp;
+                    &nbsp; <input type="radio" name="card" value="Visa"> Visa </br>
+                    &nbsp; <input type="radio" name="card" value="American Express"> American Express     &nbsp;
+                    &nbsp; <input type="radio" name="card" value="Discover"> Discover &nbsp; </br>    </br>
+
+
+                    Card Number: <input type="number" name="contact_cn" maxlength="16"> </br></br>
+
+                    Card CVV: <input type="number" name="contact_cvv" min="009" maxlength="3"> </br></br>
+
+                    Good Through:
+                    <select name="Expmonth">
+                        <option value=""> Month:</option>
+                        <option value="01 "> 01 </option>
+                        <option value="02 "> 02 </option>
+                        <option value="03"> 03 </option>
+                        <option value="04">04</option>
+                        <option value="05 "> 05 </option>
+                        <option value="06"> 06 </option>
+                        <option value="07">07</option>
+                        <option value="08"> 08 </option>
+                        <option value="09">09</option>
+                        <option value="10"> 10 </option>
+                        <option value="11"> 11 </option>
+                        <option value="12">12</option>
+                    </select> &nbsp;
+
+
+                    <select name="Expyear">
+                        <option value=""> Year:</option>
+                        <option value="18 "> 18 </option>
+                        <option value="19 "> 19 </option>
+                        <option value="20"> 20 </option>
+                        <option value="21">21</option>
+                        <option value="22 "> 22 </option>
+                        <option value="23"> 23 </option>
+                        <option value="24">24</option>
+                        <option value="25"> 25 </option>
+                        <option value="26">26</option>
+                        <option value="27"> 27 </option>
+                        <option value="28"> 28 </option>
+                        <option value="29">29</option>
+                    </select> </br></br>
+
+                </fieldset>
+
+                Do you agree to the Terms and Conditions?</br></br>
+                <input type="checkbox" name="terms" value="Yes"> Yes
+
+                </br></br>
+
+                <p><input type="submit" name="send" value="Submit"></p>
+                <p><input type="reset" name="reset"></p>
+
+            </form>
+</body>
+</html>
+
+
+
+
+</div><!--"chunk"><-->
+
+<div class="foot">
+</div><!--foot><-->
+</div><!--contains><-->
+</body>
+</html>

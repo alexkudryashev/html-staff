@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>test</title>
+    <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript">
+        function CentralScript() {
+
+        }
+
+        CentralScript.prototype.makeRequest = function (className, cbf, dataToSend) {
+            var $this = this;
+            $.ajax({
+                url: 'somedata.js',//'apiurl',
+                type: 'GET',
+                dataType: 'json',
+                data: {
+                    parameters: dataToSend
+                },
+                success: function (responseData) {
+                    //cbf(responseData);//cbf is SomeFile.resultToShow
+                    $this.showResponse(className, cbf, responseData);//this is $.ajax here
+                },
+                complete: function () {
+
+                },
+                error: function () {
+                    console.log("Error occurred...");
+                }
+            });
+        };
+
+        CentralScript.prototype.showResponse = function (className, cbf, data) {
+            //className.cbf(data);//undefined
+            cbf(data);//cbf is SomeFile.resultToShow
+        };
+    </script>
+    <script type="text/javascript">
+        function SomeFile() {
+
+        }
+
+        SomeFile.prototype.sayHi = function () {
+            var obj = new CentralScript();
+            var dataToSend = {
+                method: 'someMethod'
+            };
+            //obj.makeRequest('SomeFile', 'resultToShow', dataToSend);
+            obj.makeRequest(this, this.resultToShow, dataToSend);//this is SomeFile
+        };
+
+        SomeFile.prototype.resultToShow = function (data) {//need .prototype to add function to SomeFile
+            console.log(JSON.stringify(data));
+        };
+    </script>
+    <script type="text/javascript">
+        var ProjectName = (function () {
+
+            var sfObj;
+
+            function init() {
+                createObjects();
+                initiateProject();
+            }
+
+            function createObjects() {
+                sfObj = new SomeFile();
+            }
+
+            function initiateProject() {
+                sfObj.sayHi();
+            }
+
+            return {
+                init: init
+            };
+
+        })();
+        $(ProjectName.init);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

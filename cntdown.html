@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>cntdown</title>
+	<meta charset="utf-8" />
+    <script type="text/javascript">
+        window.onload = function () {
+            function getCookie(name) {
+                var chanks = document.cookie.split('; ');
+                for (var i = 0, n = chanks.length; i < n; i++) {
+                    var cramb = chanks[i].split('=');
+                    if (cramb[0] == name)
+                        return cramb[1];
+                }
+                return null;
+            }
+            var endTime = getCookie('endTime');
+            if (endTime == null) {
+                endTime = parseInt((new Date()).getTime() / 1000 + 2 * 60 * 60);
+                document.cookie = "endTime=" + endTime;
+            }
+            var divCnt = document.getElementById('cntdown');
+            setInterval(function () {
+                var curr = endTime - (new Date()).getTime() / 1000;
+                var h = parseInt(curr / 60 / 60);
+                var m = parseInt(curr / 60) % 60;
+                var s = parseInt(curr % 60);
+                divCnt.innerHTML = h + ':' + (m < 10 ? '0' + m : m) + ':' + (s < 10 ? '0' + s : s);
+            }, 1000);
+        };
+    </script>
+</head>
+<body>
+<div id="cntdown"></div>
+</body>
+</html>

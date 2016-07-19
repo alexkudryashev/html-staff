@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {//document must be loaded before you can manage DOM
+            //var ddl = document.getElementById("Contact_claimantType");//see above
+                //var selectedValue = ddl.options[ddl.selectedIndex].value;//see above
+            $('#Contact_contactType').change(function () {//Contact_claimantType not found make sure you use correct IDs
+                var selectedValue = this.value;// now we have selected value
+                //if (selectedValue == '0') {//you need "0" option which doesn't exist
+                if (selectedValue == '') {
+
+                    console.log("Picked Nothing");
+                    //$("#title_form").html = "Contact Form";//jQuery: $ is common nickname for jQuery
+                    $("#title_form").html("Contact Form");//this way
+
+                } else if (selectedValue == '1') {
+
+                    console.log("Picked Congress");
+                    //$("#title_form").html = "Congress Contact Form";
+                    $("#title_form").html("Congress Contact Form");
+
+                } else if (selectedValue == '2') {
+
+                    console.log("Picked Claimant");
+                    jQuery("#title_form").html = "Claimant Contact Form";//guess what to do with it
+                    etk.app.dataForm.hideControl("Contact_claimantRepresentativeType");//nobody knows yet what is "etk"
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+<h1 id ="title_form" style="margin-bottom: 25px;">Contact Form </h1> 
+
+<select class="formInput" id="Contact_contactType" name="Contact_contactType" style="width: 200px;">
+    <option value=""></option>
+
+    <option value="1">Congress</option>
+
+    <option value="2">Claimant</option>
+
+    <option value="3">Claimant Representative</option>
+
+    <option value="4">Contract Attorney</option>
+
+    <option value="5">Employer Attorney</option>
+
+    <option value="6">Employer</option>
+
+</select>
+</body>
+</html>

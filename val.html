@@ -1,0 +1,128 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script src="http://jqueryvalidation.org/files/dist/jquery.validate.min.js"></script>
+    <script src="http://jqueryvalidation.org/files/dist/additional-methods.min.js"></script>
+    <link rel="stylesheet" href="http://jqueryvalidation.org/files/demo/site-demos.css" />
+</head>
+<body>
+
+
+<div>
+<form id="myform" method="get" action=".">
+
+<label for="fname">First Name *: </label>
+<input id="fname" name="fname" />
+<br/>
+<label for="lname">Last Name *: </label>
+<input id="lname" name="lname" />
+<br/>
+<label for="email">Email *: </label>
+<input id="email" name="email" />
+<br/>
+<label for="jtitle">Job Title *: </label>
+<input id="jtitle" name="jtitle" />
+<br/>
+<label for="orgname">Organization *: </label>
+<input id="orgname" name="orgname" />
+<br/>
+<label for="orgname">Describe Yourself *: </label>
+<input id="desyourself1" name="desyourself1" type="hidden" value="123" />
+<select id="Select1" name="desyourself">
+                    <option value="">
+                    Choose One...       </option>
+                    <option value="124">
+                    Customer
+                    </option>
+                    <option value="125">
+                    Partner
+                    </option>
+                    <option value="126">
+                    Prospect
+                    </option>
+                    <option value="127">
+                    Other
+                    </option>
+                    <option value="128">
+                    Misc.
+                    </option>
+</select>
+<br/>
+<input type="submit" value="Validate!" />
+</form>
+</div>
+<div id="test">
+    <input type="text" id="original" name="itens[]" />
+<input type="text" id="clone1" name="itens[]" />
+<input type="text" id="clone2" name="itens[]" />
+<input type="text" id="clone3" name="itens[]" />
+I
+</div>
+
+<script>
+    $(document).on('click', '#test input', function (e) {
+        var inputForm = e.target;
+        modal.modal({ show: true });
+        modal.find(".btn-success").click(function () {
+            var choice = $("modal").find('input[type=radio]:checked').val();
+
+            if (choice) {
+                modal.modal('hide');
+                inputForm.value = choice;
+            }
+        });
+    });
+</script>
+<script>
+    'use strict';
+    // avoids form submit
+    jQuery.validator.setDefaults({
+        //debug: true,
+        success: function () {
+            console.log('success');
+            return true;
+        }//"valid"
+    });
+
+    $.validator.methods.email = function (value, element) {
+        return this.optional(element) || /^([\w-\.]+@(?!gmail.com)(?!yahoo.com)(?!hotmail.com)([\w-]+\.)+[\w-]{2,4})?$/.test(value);
+    }
+
+    $("#myform").validate({
+        rules: {
+            fname: {
+                required: true,
+                minlength: 1,
+                maxlength: 30,
+                lettersonly: true
+            },
+            lname: {
+                required: true,
+                minlength: 1,
+                maxlength: 30,
+                lettersonly: true
+            },
+            email: {
+                required: true,
+                email: true
+            },
+            jtitle: {
+                required: true,
+                minlength: 1,
+                maxlength: 30
+            },
+            orgname: {
+                required: true,
+                minlength: 1,
+                maxlength: 30
+            },
+            desyourself: {
+                required: true,
+            }
+        }
+    });
+</script>
+</body>
+</html>

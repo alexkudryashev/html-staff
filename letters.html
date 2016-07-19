@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <script type="text/javascript">
+        //var randArr= (function* () {//
+        //    let val1=[],val2=[],cnt=0;
+        //    for(var i=0;i<5;++i){
+        //        val1.push(i);
+        //        val2.push(i);
+        //    }
+        //    val1.sort(function(){return Math.random()<.5;});
+        //    val2.sort(function(){return Math.random()<.5;});
+
+        //    while(cnt < 5){
+        //        yield [val1[cnt],val2[cnt]];
+        //        cnt++;
+        //    }
+        //    }
+        //)();
+        function m_show_letter_example() {
+            var tbl = document.getElementsByTagName('table')[0];
+            var len = tbl.rows[0].cells.length;
+            let val1 = [], val2 = [], cnt = 0;
+            for (var i = 0; i < len; ++i) {
+                val1.push(i);
+                val2.push(i);
+            }
+            val1.sort(function () { return Math.random() < .5 ? 1 : -1; });
+            val2.sort(function () { return Math.random() < .5 ? 1 : -1; });
+            function showLetter(pos) {
+                var letter1 = document.getElementById('example_0' + (val1[pos] - 0 + 1));
+                var letter2 = document.getElementById('example_solution_0' + (val2[pos] - 0 + 1));
+                if (letter1 && letter2) {
+                    letter2.value = letter1.value;
+                    letter1.value = '';
+                    setTimeout(function () { showLetter(pos + 1); }, 1000);
+                }
+            }
+            setTimeout(function () {
+                showLetter(0);
+            }, 1000);
+        }
+        function m_show_letter_example1() {
+            var tbl = document.getElementsByTagName('table')[0];
+            var src = tbl.rows[0].getElementsByTagName('input');
+            var dest = tbl.rows[1].getElementsByTagName('input');
+            var srcInd = [], destInd = [];
+            src.sort(function () { return Math.random() < .5 ? 1 : -1; });
+            dest.sort(function () { return Math.random() < .5 ? 1 : -1; });
+            function showLetter(pos) {
+                if (src[pos] && dest[pos]) {
+                    dest[pos].value = src[pos].value;
+                    src[pos].value = '';
+                    setTimeout(function () { showLetter(pos + 1); }, 1000);
+                }
+            }
+            setTimeout(function () {
+                showLetter(0);
+            }, 1000);
+        }
+    </script>
+</head>
+<body>
+    <div onclick="m_show_letter_example()">
+        <table>
+            <tr>
+                <td><input id="example_01" name="example_alphabet_01" type="text" value="A" /></td>
+                <td><input id="example_02" name="example_alphabet_02" type="text" value="E" /></td>
+                <td><input id="example_03" name="example_alphabet_03" type="text" value="E" /></td>
+                <td><input id="example_04" name="example_alphabet_04" type="text" value="L" /></td>
+                <td><input id="example_05" name="example_alphabet_05" type="text" value="M" /></td>
+                <td><input id="example_06" name="example_alphabet_06" type="text" value="P" /></td>
+                <td><input id="example_07" name="example_alphabet_07" type="text" value="S" /></td>
+                <td><input id="example_08" name="example_alphabet_08" type="text" value="X" /></td>
+            </tr>
+            <tr>
+                <td><input id="example_solution_02" name="example_solution_02" type="text" /></td>
+                <td><input id="example_solution_08" name="example_solution_08" type="text" /></td>
+                <td><input id="example_solution_01" name="example_solution_01" type="text" /></td>
+                <td><input id="example_solution_05" name="example_solution_05" type="text" /></td>
+                <td><input id="example_solution_06" name="example_solution_06" type="text" /></td>
+                <td><input id="example_solution_04" name="example_solution_04" type="text" /></td>
+                <td><input id="example_solution_03" name="example_solution_03" type="text" /></td>
+                <td><input id="example_solution_07" name="example_solution_07" type="text" /></td>
+            </tr>
+        </table>
+    </div>
+
+</body>
+</html>

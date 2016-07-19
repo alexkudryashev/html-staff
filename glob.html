@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <script type="text/javascript">
+        "use strict";
+
+        if ('undefined' == typeof global) {
+            Object.defineProperty
+            (
+                window, 'global',
+                {
+                    writable: false,
+                    configurable: false,
+                    enumerable: false,
+                    value: window
+                }
+            );
+        }
+
+
+        Object.defineProperty
+        (
+            Function.prototype, 'wrap',
+            {
+                writable: false,
+                enumerable: false,
+                configurable: false,
+
+                value: function (jsob) {
+                    this.bind(jsob);
+
+                    for (var i in jsob)
+                    {
+                        this[i] = jsob[i];
+                    }
+                    //this[1].bind(jsob);
+
+                    return this;
+                }
+            }
+        );
+
+
+        global.typeOf = function (data) {
+            if ((data === null) || (data === undefined))
+            { return 'void'; }
+
+            if ((data === true) || (data === false))
+            { return 'bool'; }
+
+            var tpof = (({}).toString.call(data).match(/\s([a-zA-Z]+)/)[1].toLowerCase());
+
+            if ((tpof == 'array') || (tpof == 'htmlcollection') || (tpof == 'namednodemap'))
+            { return 'list'; }
+
+            if ((tpof == 'global') || (tpof == 'window'))
+            { return 'glob'; }
+
+            switch (tpof.substr(0, 6)) {
+                case 'number': return 'unit';
+                case 'string': return (/[^\x20-\x7E\t\r\n]/.test(data) ? 'blob' : 'text');
+                case 'object': return 'jsob';
+                case 'functi': return 'func';
+
+                default: return 'node';
+            }
+        }
+        .wrap
+        ({
+            list: 'void bool unit text blob list jsob func node glob'.split(' '),
+            init: function () {
+                this.list.forEach(function (item) {
+                    global[(item.toUpperCase())] = item;
+                    global[('is' + (item[0].toUpperCase() + item.substr(1, item.length)))] = function (data) {
+                        return ((typeOf(data) == this.text) ? true : false);
+                    }
+                    .wrap({ text: item.toLowerCase() }); // <-- ISSUE
+                });
+
+                return this;
+            }
+        }).init();
+    </script>
+</head>
+<body>
+
+</body>
+</html>

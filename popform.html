@@ -1,0 +1,138 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script type="text/javascript">
+        function load() {
+            //...stuff to get date and id...
+            var id = 0, date = '';
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (xhttp.readyState == 4 && xhttp.status == 200) {
+                    //var d = document.createDocumentFragment();
+                    //d.appendChild(this.responseXML.documentElement.children[1].firstChild);
+                    //document.getElementById("PopupDiv").appendChild(d);
+                    document.getElementById("PopupDiv").innerHTML = xhttp.responseText;
+                    document.getElementById("PopupDiv").removeAttribute("hidden");
+                }
+            };
+            //xhttp.responseType = 'text';
+            xhttp.open("GET", "fragment1.html?date=" + date + "&id=" + id, true);
+            xhttp.send();
+        }
+    </script>
+    <script type="text/javascript">
+        'use strict';
+           var db_data = '[{"id":143,"price":119,"start":"08\/02\/2016 12:00 am","user_id":8},{"id":142,"price":122,"start":"06\/01\/2016 12:00 am","user_id":8},{"id":141,"price":117,"start":"04\/28\/2016 12:00 am","user_id":8}]';
+        function testDates(data) {
+
+            db_data = $.parseJSON(data);
+
+
+            var period_start = new Date('04/18/2016 12:00 am'),
+                period_now = new Date(),
+                period_end = new Date('09/31/2016 12:01 am'),
+
+                array_of_all_dates = [];
+
+            var current_date = period_start;
+
+            while (current_date.getTime() <= period_end.getTime()) {
+                array_of_all_dates.push(current_date);
+                current_date = new Date(+current_date);
+                current_date.setDate(current_date.getDate() + 1);
+            }
+
+
+            // Now I loop over the array of populated dates and mutate
+            array_of_all_dates = array_of_all_dates.map(function (date) {
+                var found_in_db = db_data.filter(function (db_data) {
+                    return new Date(db_data.start).toDateString() === date.toDateString();
+                    // here is a problem becouse if I dont have same hour and minutes this are not equal so how I can make comparison only by date - days!
+                });
+                if (found_in_db.length > 0) {
+                    return found_in_db[0];
+                }
+                var new_object = {
+                    title: '1',
+                    start: date,
+                    month: date.getMonth(),
+                    price: '116'
+                };
+
+
+
+                return new_object;
+
+
+
+            });
+            return array_of_all_dates;
+        }
+        function myTest() {
+            var res = testDates(db_data);
+            document.getElementById('PopupDiv').innerHTML = JSON.stringify(res);
+        }
+    </script>
+<!--    <script type="text/javascript">
+        //function getNext() {
+        //    var ar = [1, 2, 3, 4];
+        //    var i=0;
+        //    return yield ar[i++];
+        //}
+        //function* foo(){
+        //    var index = 0;
+        //    while (index <= 2)
+        //        yield index++;
+        //}
+        //var it=foo();
+        //console.log(it.next());
+
+        function* loopFunction() {
+            var i = 0;
+
+            while (i < 5) {
+                yield "<br>The number is " + i;
+                i++;
+            }
+        }
+        var iterator=loopFunction();
+        function main(){
+            var res=iterator.next();
+            if(!res.done)
+                document.getElementById('text').innerHTML+=res.value;
+            else
+                document.getElementById('text').innerHTML+='<br />No more results';
+            return false;
+        }
+    </script>-->
+    <script>
+        function hideUnique() {
+            var imgs = document.getElementsByTagName('img');
+            var srcs = [];
+            for (var i = 0, n = imgs.length; i < n; i++) {
+                srcs[imgs[i].src] = (srcs[imgs[i].src] || 0) + 1;
+            }
+            for (var i = 0, n = imgs.length; i < n; i++) {
+                if (srcs[imgs[i].src] > 1)
+                    imgs[i].style.display = 'none';
+            }
+
+        }
+        window.onload = hideUnique;
+    </script>
+</head>
+<body>
+    <form method="get" action="popform.html">
+    <input type="button" onclick="load(); return false;" value="load" />
+            <button type="submit" style="width: 80px" name="submit" onclick="return main()">Submit</button>
+        <p id="text"></p>
+    </form>
+    <img src="img1.gif" />
+    <img src="img1.gif" />
+    <img src="img2.gif" />
+    <img src="img3.gif" />
+    <div id="PopupDiv" hidden="hidden">hidden</div>
+</body>
+</html>

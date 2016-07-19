@@ -1,0 +1,128 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.1.4.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        'use strict';
+        //$(document).ready(function () {
+
+        //    $("#input-userName").change(function () {
+        //        var userNameTxt = $("#input-userName").val();
+        //        var prevUserName = '';
+        //        if (userNameTxt != prevUserName) {
+        //            if (userNameTxt.length >= 6 && userNameTxt.length <= 20) {
+        //                $("#divVerifyUserName").show();
+        //                $("#input-userName").prop("disabled", true);
+
+        //                $.ajax
+        //                ({
+        //                    type: "GET",
+        //                    url: '/json123.php',//BASE_URL + "MyCall",
+        //                    async: true,
+        //                    data: { 'userName': userNameTxt },
+        //                    success: function (resultset) {
+        //                        console.log('success');
+
+        //                        //prevUserName = userNameTxt
+        //                        //$("#userNameValidationMessage").removeClass("error");
+
+        //                        //if (resultset != null) {
+
+        //                        //    $("#divVerifyUserName").hide();
+        //                        //    $("#input-userName").prop("disabled", false);
+
+
+        //                        //    if (resultset.status) {
+        //                        //        $("#userNameValidationMessage").addClass("message");
+        //                        //    }
+        //                        //    else {
+        //                        //        $("#userNameValidationMessage").removeClass("message");
+        //                        //        $("#userNameValidationMessage").addClass("error");
+        //                        //    }
+
+        //                        //    $("#userNameValidationMessage").text(resultset.msg);
+        //                        //}
+        //                    },
+        //                    error: function (xhr, error) {
+        //                        console.log(error);
+        //                        //$("#userNameValidationMessage").text("Error while processing the request. Please try again.");
+        //                    }
+        //                });
+
+        //            }
+        //        }
+        //    });
+        //});
+        window.onload = function () {
+            function logEvent(a, b) {
+                return function () {
+                    console.log(a);
+                    console.log(b);
+                }
+            }
+            var board = document.getElementsByTagName("td");
+            for (var i = 0; i < board.length; i++) {
+                console.log(board[i]);
+                //var log = logEvent(board[i].innerHTML, i);
+                //board[i].addEventListener("click", log);
+                board[i].addEventListener("click", logEvent(board[i].innerHTML, i));
+                //board[i].addEventListener("click", function () {
+                //    console.log(board[i]);
+                //    console.log(i);
+                //});
+            }
+        }
+        $(document).ready(function () {
+            $("#menu-icon").click(function () {
+                var navMenu = 
+                    $("#main-nav").toggleClass(function () {
+                        console.log(this.id);
+                        var a = $(this).is('.display');
+                        $(this).hasClass("display") ? $(this).show() : $(this).hide();
+                    return "display";
+                });
+                //navMenu.toggleClass("display");
+                if (navMenu.hasClass("display")) {
+                    navMenu.show("transition.slideDownBigIn", {
+                        duration: 300
+                    });
+                } else {
+                    navMenu.hide("transition.slideUpBigOut", {
+                        duration: 300
+                    });
+                }
+            });
+
+        });
+    </script>
+
+</head>
+<body>
+    <div id="menu-icon" style="border:solid">menu
+        <div id="main-nav">some text</div>
+    </div>
+<input id="input-userName" type="text" />
+    <!--<input id="input-userName1" type="text" />
+    <div id="divVerifyUserName" style="display:none">verify user</div>-->
+    <table border="1">
+        <tr>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>5</td>
+            <td>6</td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>8</td>
+            <td>9</td>
+        </tr>
+    </table>
+
+</body>
+</html>

@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <style type="text/css">
+        .first {
+            color: red;
+        }
+
+        .sec {
+            color: green;
+        }
+
+        .third {
+            color: blue;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script type="text/javascript">
+        function markup() {
+            var regEx = /(?:[^"']|^)(\bshow me a p(i|h)\w+\b)(?!["'])/ig;
+            var div = document.getElementById('testDiv');
+            div.innerHTML = div.innerHTML.replace(regEx, '<span class="first">$1</span>');//<span class="sec">$2</span><span class="third">$3</span>
+        }
+        function decode(text) {
+            var result = '';
+            var i = 0, n = text.length;
+            while (i < n) {
+                if (Number(text[i]) == text[i]) {
+                    i += parseInt(text[i]) + 1;
+                }
+                else
+                    result += text[i++];
+            }
+            return result;
+        }
+        $(document).ready(function () {
+            var Cart = {
+                items: [1, 4, 2],
+                onClick: function () {
+                    // Do something with this.items.
+                    console.log(this.constructor);
+                }
+            }
+            $("#mybutton").click(function () { Cart.onClick(); });//Cart.onClick.bind(Cart));
+        });
+        function countLetters(inp) {
+            inp = inp.replace(/[^a-z]/g, '');
+            var letters = {};//new Object();
+            for (var i = 0; i < inp.length; i++) {
+                letters[inp[i]] = (letters[inp[i]] || 0) + 1;
+            }
+            console.log(JSON.stringify(letters));
+            return letters;
+        }
+    </script>
+
+</head>
+<body>
+    <div id="testDiv">
+        I have been trying to understand alternation but the result of this 
+        regex is that it will only match show me a picture, & show me a photo, 
+        but not show me a photograph. My understanding is that regex already has found show me a photos so it stops there.
+    </div>
+    <input type="button" value="mark" onclick="markup()" />
+    <button id="mybutton" type="button">Click me</button>
+</body>
+</html>

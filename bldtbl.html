@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Build Table</title>
+	<meta charset="utf-8" />
+    <style type="text/css">
+        .tbl{border:solid 1px #ccc}
+        .tbl tr:first-child td,
+        .tbl td:first-child{background:#ccc;padding:4px}
+    </style>
+    <script type="text/javascript">
+        'use strict';
+        function buildTable() {
+            //get numbers from micro-form
+            var rows = document.getElementById('rows').value;
+            var cols = document.getElementById('cols').value;
+            //create table
+            var tbl = document.createElement('table');
+            tbl.className = 'tbl';//it is better then inline style
+            //note that HTML table has its own DOM model
+            var tr = null;//tbl.insertRow(-1);//insert new row
+            //first row is special
+            //tr.insertCell(-1).innerHTML = 'X';
+            //so treat it accordingly
+            //for (var i = 1; i < cols; i++) {
+            //    tr.insertCell(-1).innerHTML = i;//insert new cell and set value inside
+            //}
+            //remaining rows
+            for (var i = 1; i <= rows; i++) {
+                tr = tbl.insertRow(-1);
+                //first column is special
+                //tr.insertCell(-1).innerHTML = i;
+                for (var j = 1; j <= cols; j++) {
+                    tr.insertCell(-1).innerHTML = i * j;//i == 0 && j == 0 ? 'X' : (i == 0 ? 1 : i) * (j == 0 ? 1 : j);
+                }
+            }
+            //well done. Place our table in a container
+            document.getElementById('table').appendChild(tbl);
+        }
+    </script>
+</head>
+<body>
+    <div>
+        Rows: <input type="number" id="rows" min="2" max="20" value="10" />&nbsp;
+        Columns: <input type="number" id="cols" min="2" max="20" value="10" />&nbsp;
+        <button onclick="buildTable()">Build Table</button>
+    </div>
+    <div id="table"></div>
+</body>
+</html>

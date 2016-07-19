@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.1.4.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#stock td').click(function () {
+
+                console.log($(this).parents('table').find('tr:first-child').children('th:nth-child(' + (this.cellIndex + 1) + ')').html());
+            });
+        });
+    </script>
+    <!--<script type="text/javascript">
+        window.onload = function () {
+            var tbl = document.getElementById('stock');
+            var tds = document.getElementsByTagName('td');
+            for (var i = 0, td; td = tds[i]; ++i) {
+                td.onclick = function () {
+                    var tr = this.parentNode;
+                    console.log(tbl.rows[0].cells[this.cellIndex].innerHTML);
+                }
+            }
+        }
+    </script>-->
+</head>
+<body>
+    <table style="width:100%" id="stock">
+        <tbody>
+            <tr>
+                <td>foo</td>
+                <td id="target">bar</td>
+                <td>-1</td>
+                <td>...</td>
+            </tr>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Quantity</th>
+                <th>Options</th>
+            </tr>
+        </thead>
+            <tr>
+                <td>foo</td>
+                <td id="target">bar</td>
+                <td>-1</td>
+                <td>...</td>
+            </tr>
+        </tbody>
+        <tr>
+            <td>foo</td>
+            <td id="target">bar</td>
+            <td colspan="2">-1</td>
+            <!--<td>...</td>-->
+        </tr>
+        </table>
+</body>
+</html>

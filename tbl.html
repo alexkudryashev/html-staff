@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <style type="text/css">
+        .tbl{border:solid 1px #ccc;width:300px}
+        /*.tbl tr{height:20px}*/
+        .tbl td{border:solid 1px #fcc}
+    </style>
+    <script type="text/javascript">
+        'use strict';
+        const input = [
+  { value: "a1 long content long content long content long content long content long content long content ", colspan: 1, rowspan: 1 },
+  { value: "a2 long content long content long content long content long content long content", colspan: 1, rowspan: 1 },
+  { value: "a3 long content long content long content long content long content long content", colspan: 1, rowspan: 3 },
+
+  { value: "b1 long content long content long content long content long content long content long content long content long content long content", colspan: 1, rowspan: 2 },
+  { value: "b2 long content long content long content long content long content long content", colspan: 1, rowspan: 1 },
+
+ // { value: "c1", colspan: 1, rowspan: 1 },
+  { value: "c2 long content long content long content long content long content long content long content", colspan: 1, rowspan: 2 },
+
+  { value: "d1 long content long content long content long content long content long content", colspan: 1, rowspan: 1 },
+  { value: "d3 long content long content long content long content long content long content", colspan: 1, rowspan: 1 },
+
+  { value: "e1 long content long content long content long content long content", colspan: 1, rowspan: 1 },
+  { value: "e2 long content long content long content long content long content long content", colspan: 2, rowspan: 1 },
+  //{value:"f1",colspan:2,rowspan:2},
+  //{ value: "f2", colspan: 2, rowspan: 1 },
+  //{ value: "g1", colspan: 1, rowspan: 1 }
+              ];
+        //var input = [
+  //{ value: "a1", colspan: 1, rowspan: 1 }, // 1
+  //{ value: "a2", colspan: 1, rowspan: 1 }, // 2
+  //{ value: "a3", colspan: 1, rowspan: 3 }, // 3
+
+  //{ value: "b1", colspan: 1, rowspan: 2 }, // 1
+  //{ value: "b2", colspan: 1, rowspan: 1 }, // 1
+
+  //{ value: "c2", colspan: 1, rowspan: 2 }, // 2
+
+  //{ value: "d1", colspan: 1, rowspan: 1 }, // 1
+  ////{ value: "d3", colspan: 1, rowspan: 2 }, // 1
+
+  //{ value: "e1", colspan: 1, rowspan: 1 }, // 1
+  //{ value: "e2", colspan: 1, rowspan: 2 }, // 2
+  //      ];
+
+        const width = 3;
+        function buildTbl() {
+            var tbl = document.createElement('table');
+            tbl.className = 'tbl';
+            var cols = width, tr = null, td = null, i = 0, inp = null, rowspan = [];
+            while (inp = input[i]) {
+                if (cols >= width) {
+                    tr = tbl.insertRow(-1);
+                    cols = 0;
+                    for (var j = 0, n = rowspan.length; j < n; j++) {
+                        if (rowspan[j] > 1) {
+                            cols++;
+                            rowspan[j]--;
+                        }
+                    }
+                }
+                td = tr.insertCell(-1);
+                td.innerHTML = inp.value;
+                if (inp.colspan > 1)
+                    td.setAttribute('colspan', inp.colspan);
+                if (inp.rowspan > 1) {
+                    td.setAttribute('rowspan', inp.rowspan);
+                    rowspan.push(inp.rowspan);
+                }
+                cols += inp.colspan;
+                i++;
+            }
+            document.getElementById('content').appendChild(tbl);
+        }
+    </script>
+</head>
+<body>    
+<div id="content">
+    <table class="tbl">
+        <tbody>
+            <tr>
+                <td>a1</td>
+                <td>a2</td>
+                <td rowspan="3">a3</td>
+            </tr>
+            <tr>
+                <td rowspan="2">b1</td>
+                <td>b2</td>
+            </tr>
+            <tr>
+                <td rowspan="2">c2</td>
+            </tr>
+            <tr>
+                <td>d1</td>
+
+            </tr>
+            <!--<tr>
+                <td colspan="1">d3</td>
+            </tr>-->
+            <tr>
+                <td>e1</td>
+                <td colspan="2">e2</td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="tbl">
+        <tbody>
+            <tr>
+                <td>a1</td>
+                <td>a2</td>
+                <td rowspan="3">a3</td>
+            </tr>
+            <tr>
+                <td rowspan="2">b1</td>
+                <td>b2</td>
+            </tr>
+            <tr>
+                <td rowspan="2">c2</td>
+            </tr>
+            <tr>
+                <td>d1</td>
+                <td>d3</td>
+            </tr>
+            <tr>
+                <td>e1</td>
+                <td colspan="2">e2</td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <script type="text/javascript">
+        function getLinks() {
+            var lnks = document.getElementById('content').getElementsByTagName('a');
+            var footLnks = [];
+            var j = 1;
+            var ul = document.getElementById('footlink');
+            for (var i = 0, ank; ank = lnks[i]; ++i) {
+                footLnks[ank.href] = (footLnks[ank.href] || j++);
+                var sup = document.createElement('sup');
+                sup.innerHTML = footLnks[ank.href];
+                ank.appendChild(sup);
+            }
+            var ul = document.getElementById('footlink');
+            for (var href in footLnks) {
+                var li = document.createElement('li');
+                li.innerHTML = footLnks[href] + ': ' + href;
+                ul.appendChild(li);
+            }
+        }
+        window.onbeforeprint = getLinks;
+    </script>
+</head>
+<body>
+    <p id="content">
+        I may link to <a href="http://www.google.com">Google</a>,
+        then to <a href="http://www.yahoo.com">Yahoo</a>, then to
+        <a href="http://www.google.com">Google again</a>. Then finally,
+        I'll throw in <a href="http://www.bing.com">Bing</a> just for kicks.
+    </p>
+    <ul id="footlink">
+    </ul>
+</body>
+</html>

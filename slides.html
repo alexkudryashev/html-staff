@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Slides</title>
+	<meta charset="utf-8" />
+    <style type="text/css">
+        #slides {
+            position: relative;
+            width: 600px;
+            height:600px;
+            margin: .5em auto;
+        }
+            #slides figure {
+                position: absolute;
+                top: 0;
+                left: 0;
+                opacity: 0;
+            }
+                #slides figure img {
+                    max-width: 100%;
+                }
+            #slides figcaption {
+                position: absolute;
+                top: 0;
+                color: #fff;
+                background: rgba(0,0,0, .3);
+                font-size: .8em;
+                padding: 8px 12px;
+                opacity: 0;
+                transition: opacity .5s;
+            }
+            #slides:hover figure figcaption {
+                /*transition: opacity .5s;*/
+                opacity: 1;
+            }
+ figure:nth-child(1) {
+    /*opacity:1;*/
+   animation: xfade 30s 24s infinite;
+   -moz-animation: xfade 30s 12s infinite;
+}
+figure:nth-child(2) {
+    /*opacity:0;*/
+   animation: xfade 30s 18s infinite;
+   -moz-animation: xfade 30s 6s infinite;
+}
+figure:nth-child(3) {
+    opacity:0;
+   animation: xfade 30s 12s infinite;
+   -moz-animation: xfade 30s 0s infinite;
+}
+figure:nth-child(4) {
+    /*opacity:0;*/
+   animation: xfade 30s 6s infinite;
+   -moz-animation: xfade 30s 24s infinite;
+}
+figure:nth-child(5) {
+    /*opacity:0;*/
+   animation: xfade 30s 0s infinite;
+   -moz-animation: xfade 30s 18s infinite;
+}
+        @keyframes xfade {
+            0% {
+                opacity: 1;
+            }
+
+            /*10.5%*/15% {
+                opacity: 1;
+            }
+
+            /*12.5%*/20% {/* 100% / num of slides */
+                opacity: 0;
+            }
+
+            /*98%*/90% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+<div id="slides">
+    <figure>
+        <img src="/img/DSCN0036.JPG" />
+        <figcaption>DSCN0036</figcaption>
+    </figure>
+    <figure>
+        <img src="/img/DSCN0037.JPG" />
+        <figcaption>DSCN0037</figcaption>
+    </figure>
+    <figure>
+        <img src="/img/DSCN0043.JPG" />
+        <figcaption>DSCN0043</figcaption>
+    </figure>
+    <figure>
+        <img src="/img/DSCN0050.JPG" />
+        <figcaption>DSCN0050</figcaption>
+    </figure>
+    <figure>
+        <img src="/img/DSCN0051.JPG" />
+        <figcaption>DSCN0051</figcaption>
+    </figure>
+</div>
+</body>
+</html>

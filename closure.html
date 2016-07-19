@@ -1,0 +1,157 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Closure JS</title>
+    <script type="text/javascript">
+        var glob = 0;
+        var createWorker = (function () {
+            var workCount = 0;
+            var task1 = function (el) {
+                var t = t || 0;
+                workCount += 1;
+                console.log(el.id + " task1: " + workCount);
+                console.log(el.id + " task1 t: " + (t++));
+                console.log(el.id + " glob: " + (glob++));
+            }
+            var task2 = function (el,ev) {
+                var t = t || 0;
+                workCount += 1;
+                console.log(el.id + " task2: " + workCount);
+                console.log(el.id + " task2 t: " + (t++));
+                console.log(el.id + " glob: " + (glob++));
+            }
+            return {
+                job1: task1,
+                job2: task2
+            };
+        })();
+        //var app = new createWorker();
+        //var app1 = new createWorker();
+
+        //function chngSel() {
+        //    return confirm('Are you sure?');
+        //}
+        window.onload = function () {
+            'use strict';
+            (function () {
+                for (var i = 0, n = arguments.length; i < n; i++) {
+                    var elem = document.getElementById(arguments[i]);
+                    elem.prevValue = elem.value;
+                    elem.onchange = function (e) {
+                        console.log('prev ' + this.id + '; ' + this.prevValue);
+                        var og;
+                        if ((og=this.options[this.selectedIndex].parentNode).tagName == 'OPTGROUP')
+                            console.log(og.label);// this.options[this.selectedIndex].parentNode.label);
+                        var ok = confirm('Are you sure?');
+                        if (ok)
+                            this.prevValue = this.value;
+                        else
+                            this.value = this.prevValue;
+                        var that = this;
+                        setTimeout(function () { console.log('new ' + that.id + '; ' + that.prevValue); }, 10);
+                        //console.log('new ' + this.id + '; ' + this.prevValue);
+                    }
+                }
+            })('sel', 'sel1');
+        }
+        function createArray() {
+            var array = [];
+            array.push1 = function (val) {
+                array[array.length] = val;
+                return array;
+            };
+            array.pop1 = function () {
+                return array[array.length - 1];
+            };
+
+            return array;
+        };
+
+        var myArray = createArray();
+        //function validatePhone(phone) {
+        //    //var phone = document.getElementById("phone").value;
+
+        //    //var regex1 = /^[\+\d][\s(\-\d][\s()\-\d]{8,}/g;
+        //    //var regex2 = /\D*(\d\D*){11}/g;
+        //    var regex1 = /^(\+\d)?(\(|-)?\d{3}(\)|-)?\d{3}-?\d{4}$/;
+        //    if (!regex1.test(phone)){// phone.match(regex1)){// && !phone.match(regex2)) {
+        //        //producePrompt("Error", "comment_phone_prompt");
+        //        return false;
+        //    }
+        //    return true;
+        //}
+        function sumTarget(ar, t) {
+            var res = [];
+            for (var i = 0, n = ar.length; i < n-1; i++) {
+                for (var j = i + 1; j < n; j++) {
+                    if (ar[i] + ar[j] == t) {
+                        res.push({ num1: i, val1: ar[i], num2: j, val2: ar[j] });
+                    }
+                }
+            }
+            console.log(JSON.stringify(res));
+        }
+        sumTarget([2, 11, 15, 7], 9);
+    </script>
+    <!--<script type="text/javascript">
+        function getrandomnumber(min, max, notthese) {
+            num = min + Math.floor((max - min + 1) * Math.random());
+            return (num);
+        }
+
+        function getoption(s, ch, num) {
+            var a = s.split(ch)
+            return a[num - 1];
+        }
+
+        function getequation() {
+            var num1 = getrandomnumber(20, -20, "");
+            var num2 = getrandomnumber(20, -20, "");
+            var num3 = getrandomnumber(20, -20, "");
+            var num4 = getrandomnumber(20, -20, "");
+            var letter = getoption("x,y,z,w", ",", getrandomnumber(1, 4));
+
+            var str = "" + num1 + "" + letter + "+" + num2 + "=" + num3 + "" + letter + "+" + num4 + ""
+            var total = (num4 - num2) / (num1 - num3);
+            return (str + " (" + total + ")");
+
+        }
+        function test() {
+            var tst = document.getElementById('divTest');
+            for (var i = 1; i <= 20; i++) {
+                tst.innerHTML += getequation() + "<br>";
+               // document.write(getequation() + "<br>")
+
+            }
+        }
+    </script>-->
+</head>
+<body>
+<div>
+    <input type="button" id="btn1" value="task1" onclick="createWorker.job1(this)" />
+    <input type="button" id="btn2" value="task2" onclick="createWorker.job2(this)" /><br />
+<!--    <input type="button" id="btn3" value="task1" onclick="app1.job1(this)" />
+    <input type="button" id="btn4" value="task2" onclick="app1.job2(this)" />-->
+<!--    <input type="button" value="run" onclick="test()" />
+    <div id="divTest"></div>-->
+    <div>
+        <select id="sel">
+            <option value="-1">select</option>
+            <option value="1">one</option>
+            <option value="2">two</option>
+        </select>
+        <select id="sel1">
+            <option value="-1">select</option>
+            <optgroup label="first">
+            <option value="1">one</option>
+            <option value="2">two</option>
+            </optgroup>
+            <optgroup label="second">
+            <option value="11">one</option>
+            <option value="12">two</option>
+            </optgroup>
+        </select>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.1.4.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        'use strict';
+        var xhr, done;
+        function getResp() {
+            if (!done && xhr && xhr.readyState !== 4)
+                xhr.abort();
+            done = false;
+            xhr = $.ajax("json.php",{method:'GET'})
+                .done(function (json) {
+                    console.log(json);
+                    var data = $.parseJSON(json);
+                    if (data.data) {
+                        // Yay data!
+                    } else {
+                        // Ahw no data or empty data
+                    }
+                })
+                .fail(function (jqXHR, textStatus, error) {
+                    // This is triggered by Edge, `error` is "abort"
+                    var string = "An error occurred: " + error + ".";
+                    //alert(string);
+                    console.log(string);
+                })
+                .always(function () {
+                    done = true;
+                });
+        }
+    </script>
+</head>
+<body>
+<input type="button" onclick="getResp()" value="run" />
+</body>
+</html>

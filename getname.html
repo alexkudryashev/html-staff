@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.1.4.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var capName = '';
+            var capStart = false;
+            $('#txt').keypress(function (e) {
+                if (e.key == '#') {
+                    capStart = true;
+                    capName = '';
+                }
+                if (capStart && /[a-z0-9_#-]/i.test(e.key)) {
+                    capName += e.key;
+                }
+                if (capStart && !/[a-z0-9_#-]/i.test(e.key)) {
+                    capStart = false;
+                    doSomething(capName);
+                }
+            });
+            function doSomething(text) {
+                $('#result').html(capName);
+            }
+        });
+    </script>
+</head>
+<body>
+    <textarea id="txt"></textarea><br />
+    <div id="result"></div>
+</body>
+</html>

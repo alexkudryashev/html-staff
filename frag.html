@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.1.4.min.js" type="text/javascript"></script>
+</head>
+<body>
+<div>
+    <input type='checkbox' id='try'>try
+    <button id='click'>Click</button>
+</div>
+    <script type="text/javascript">
+        $(document).on('change', "#try", function (event) {
+            console.log(event);//.delegateTarget.activeElement);
+            if (event.originalEvent === undefined) {
+                alert('not human')
+            } else {
+                alert(' human');
+            }
+            event.delegateTarget = null;
+
+        });
+
+        $('#click').click(function (event) {
+            $("#try").click();
+        });
+    </script>
+</body>
+</html>

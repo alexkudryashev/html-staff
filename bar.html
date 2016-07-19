@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <style type="text/css">
+        .container {
+            width: 80%;
+            height: 40px;
+            background: grey;
+            display: table;
+        }
+            .container > div {
+                display: table-row;
+            }
+
+                .container > div > div {
+                    display: table-cell;
+                    vertical-align: top;
+                }
+        .box {
+            height: 50%;
+            margin: 0 7px;
+            border: 15px solid black;
+            border-top: none;
+            border-bottom: solid 1px black;
+            /*float: left;*/
+        }
+
+        .bar {
+            width: 80%;
+            height: 100%;
+            background: red;
+            /*float: left*/
+        }
+
+        aside {
+    margin: -335px;
+}
+main {
+    display:block;
+    margin-left: 0;
+}
+label {
+    position: absolute;
+    top: 20px;
+    left: 25px;
+    width: 25px;
+    height: auto;
+    display: block;
+    cursor: pointer;
+}
+#hamburger:checked + aside {
+    margin: 0px;
+}
+        #hamburger:checked + aside + main {
+            color:red;
+        }
+    </style>
+    <script>
+        //Code for testing the stack size
+        //var cnt = 0;
+
+        function test(cnt) {
+            //Max stack size is nearer to ~41800
+            //cnt++;
+            try {
+                if (cnt == 1000) {//41763
+                    console.log('finished');
+                    return cnt;//true;
+                }
+            }
+            catch (ex) {
+                console.log('ex');
+               // throw ex;
+                return cnt;
+            }
+            try {
+                return test(++cnt);
+            }
+            catch (ex1) {
+                throw ex1;
+                console.log(ex1);
+                return cnt;
+            }
+        }
+
+    </script>
+    <script type="text/javascript">
+        function* fibonacci(val1,val2) {//
+            //let val1=0,val2=1;
+            yield val1;
+            yield val2;
+            while(true){
+                //tmp=val1+val2;
+                //val1=val2;
+                //val2=tmp;
+                [val1,val2]=[val2,val1+val2];
+                yield val2;
+            }
+        }
+        
+        var fi=fibonacci(1,2);
+    </script>
+    <script type="text/javascript">
+        function parseSomething() {
+            var smth = document.getElementsByTagName('Something')[0];
+            //var d = document.createDocumentFragment();
+            //var d = document.createNodeIterator(
+            d.appendChild(smth);
+            return d;
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div>
+            <div>
+                <div class="box"></div>
+            </div>
+            <div class="bar"></div>
+            <div>
+                <div class="box"></div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <label for="hamburger"><img src="images/hamburger.png" /></label>
+<input type="checkbox" id="hamburger" />
+<aside>aside
+     <!-- stuff -->
+</aside>
+<main>main
+    <!-- stuff -->
+</main>
+    </div>
+    <div>
+        <Something attribute="first">
+    <div class="container">
+        <Something attribute="second" />
+        <Something attribute="third">
+            <Something attribute="fourth" />
+        </Something>
+    </div>
+</Something>
+<Something attribute="fifth">
+    <Something attribute="sixth" />
+</Something>
+    </div>
+</body>
+</html>

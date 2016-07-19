@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="author"  content="Carlos Cordova">
+    <meta charset="utf-8">
+    <title>Assessment 3 part 4 (Finishing the Game)</title>
+    <style>
+
+      img{
+        position: absolute;
+      }
+
+      div{
+        position: absolute;
+        width: 500px;
+        height: 500px;
+      }
+
+      #rightSide{
+        left: 500px;
+        border-left: 1px solid black;
+      }
+
+    </style>
+
+    <script type="text/javascript">
+        'use strict';
+        var numberOfFaces = 5;
+
+        function generateFaces() {
+            function deleteAllChildren() {
+                theLeftSide = document.getElementById("leftSide");
+                while (theLeftSide.firstChild) {
+                    theLeftSide.removeChild(theLeftSide.firstChild);
+                }
+                theRightSide = document.getElementById("rightSide");
+                while (theRightSide.firstChild) {
+                    theRightSide.removeChild(theRightSide.firstChild);
+                }
+            }
+            var theBody = document.getElementsByTagName("body")[0];
+            var theLeftSide = document.getElementById("leftSide");
+            var theRightSide = document.getElementById("rightSide");
+            for (var i = 0; i < numberOfFaces; i++) {
+                var newImage = document.createElement("img");
+                theLeftSide.appendChild(newImage);
+                newImage.style.top = Math.floor(Math.random() * 400) + 'px';
+                newImage.style.left = Math.floor(Math.random() * 400) + 'px';
+                //theLeftSide = document.getElementById("leftSide");
+                newImage.src = "http://home.cse.ust.hk/~rossiter/mooc/matching_game/smile.png";
+
+                var leftSideImages = theLeftSide.cloneNode(true);
+                leftSideImages.removeChild(leftSideImages.lastChild);
+                theRightSide.appendChild(leftSideImages);
+            }
+            theLeftSide.lastChild.onclick = function nextLevel(event) {
+                event.stopPropagation();
+                numberOfFaces += 5;
+                deleteAllChildren();
+                generateFaces();
+            };
+            theBody.onclick = function gameOver() {
+                alert("Sorry, your game is over!");
+                theBody.onclick = null;
+                theLeftSide.lastChild.onclick = null;
+            };
+            /*console.log(theLeftSide.childNodes[0]);
+            console.log(theLeftSide.childNodes[1]);
+            console.log(theLeftSide.childNodes[2]);
+            console.log(theLeftSide.childNodes[3]);
+            console.log(theLeftSide.childNodes[4]);
+            */
+        }
+    </script>
+
+  </head>
+  <body onload="generateFaces()">
+    <h1>Matching Game</h1>
+    <p>Click on the extra smiling face on the left.</p>
+    <div id="leftSide"></div>
+    <div id="rightSide"></div>
+  </body>
+</html>

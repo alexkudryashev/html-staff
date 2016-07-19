@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>test</title>
+<style type="text/css">
+    .hd-main .has-pulldown {
+        cursor: pointer;
+        position: relative;
+        *z-index: 10000;
+    }
+
+    .hd-main .pulldown {
+        position: absolute;
+        cursor: default;
+        display: none;
+        top: 30px;
+        left: 0;
+    }
+
+        .hd-main .pulldown .arrow {
+            margin-bottom: -1px;
+            margin-bottom: 0;
+            height: 0;
+            width: 0;
+            font-size: 0;
+            line-height: 0;
+            border-width: 7px;
+            border-style: solid;
+            border-color: transparent transparent #F6F6F9 transparent;
+            filter: chroma(color=tomato);
+            border-color: tomato tomato #F6F6F9 tomato;
+            position: relative;
+            display: block;
+            left: 20px;
+            z-index: 2;
+        }
+
+        .hd-main .pulldown .content {
+            background: #F6F6F9;
+            color: #333;
+            text-align: left;
+            border-radius: 3px;
+            border: rgb(175,175,175) 1px solid;
+            border-width: 0 1px 1px 1px;
+            box-shadow: 0 2px 4px rgba(0,0,0,.2);
+            position: relative;
+            z-index: 1;
+        }
+
+    .hd-main .pulldown-canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        filter: alpha(opacity=0);
+    }
+
+    .hd-main .navs .def-nav, .hd-main .navs .pulldown-nav, .hd-main .navs .separate {
+        display: block;
+        float: left;
+        height: 48px;
+        font: 18px/30px "Microsoft YaHei","Microsoft JhengHei";
+        color: #d8d8d8;
+        text-align: center;
+        width: 90px;
+        line-height: 48px;
+    }
+
+    .hd-main .navs .pulldown-nav {
+        position: relative;
+    }
+
+        .hd-main .navs .pulldown-nav em {
+            position: absolute;
+            display: block;
+            left: 69px;
+            top: 18px;
+            height: 12px;
+            width: 12px;
+            font-size: 0;
+            background-position: -89px -45px;
+        }
+
+        .hd-main .navs .pulldown-nav:hover .f-icon, .hd-main .navs .pulldown-nav:active .f-icon {
+            position: absolute;
+            display: block;
+            right: 11px;
+            top: 18px;
+            height: 12px;
+            width: 12px;
+            font-size: 0;
+            background-position: -89px -55px;
+        }
+</style>
+</head>
+<body>
+<div class="hd-main">
+    <ul>
+        <li class="info-i user-name has-pulldown">
+            <em class="f-icon pull-arrow"></em>
+            <span class="name top-username">David</span>
+            <div class="pulldown user-info">
+                <em class="arrow"></em>
+                <div class="content">
+                    <span class="li"><a href="">aa</a></span>
+                    <span class="li"><a href="">bb</a></span>
+                    <span class="li"><a href="">cc</a></span>
+                    <span class="li"><a href="">dd</a></span>
+                    <span class="separate-li no-height"></span>
+                    <span class="li"><a href="javascript:;" id="signout">Log Out</a></span>
+                </div>
+            </div>
+        </li>
+    </ul>
+
+</div>
+</body>
+</html>

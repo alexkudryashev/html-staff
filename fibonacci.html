@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Fibonacci</title>
+	<meta charset="utf-8" />
+    <script type="text/javascript">
+        'use strict';
+        function* fibonacci(cur, nxt) {//
+            //let cur=0,nxt=1;
+            yield cur;
+            yield nxt;
+            while(true){
+                [cur,nxt]=[nxt,cur+nxt];
+                yield nxt;
+            }
+        }
+        
+        function getNumbers(){
+            var a = document.getElementById('cur').value-0;
+            var b = document.getElementById('nxt').value-0;
+            var n = document.getElementById('cnt').value-0;
+            var fi = fibonacci(a,b);
+            var fiNums = [];
+            for (var i = 0; i < n; i++) {
+                var tmp=fi.next();
+                fiNums.push(tmp.value);
+            }
+            document.getElementById('output').innerHTML = fiNums.join(', ');
+        }
+        function getNumbersOld(){
+            var a = document.getElementById('cur').value-0;
+            var b = document.getElementById('nxt').value-0;
+            var n = document.getElementById('cnt').value-0;
+            var fi = fibonacci(a,b);
+            var fiNums = [b,a];
+            for (var i = 2; i < n; i++) {
+                fiNums.unshift(fiNums[0]+fiNums[1]);
+            }
+            document.getElementById('output').innerHTML = fiNums.reverse().join(', ');
+        }
+        function fibonacciClosure(cur,nxt){
+            var fi=[nxt,cur];
+            var cnt=0;
+            return function(){
+                if(cnt<2)
+                    return fi[1-cnt++];
+                else{
+                    fi.unshift(fi[0]+fi[1]);
+                    fi.pop();
+                    cnt++;
+                    return fi[0]
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+Current:<input type="number" id="cur" value="1" />
+    Next:<input type="number" id="nxt" value="1" />
+    Count:<input type="number" id="cnt" value="5" />
+    <button onclick="getNumbersOld()">Get Numbers</button>
+    <div id="output"></div>
+</body>
+</html>
